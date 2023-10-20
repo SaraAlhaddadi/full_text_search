@@ -1,0 +1,21 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  country: MyString
+  title: MyString
+  gender: MyString
+  skill: MyString
+  sector: MyString
+  company: MyString
+  salary: 9.99
+  posted_at: 2023-10-20 23:20:33
+
+two:
+  country: MyString
+  title: MyString
+  gender: MyString
+  skill: MyString
+  sector: MyString
+  company: MyString
+  salary: 9.99
+  posted_at: 2023-10-20 23:20:33
