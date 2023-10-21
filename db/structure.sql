@@ -235,7 +235,6 @@ ALTER TABLE ONLY public.jobs
 SET search_path TO "$user", public;
 
 INSERT INTO "schema_migrations" (version) VALUES
-('20231020195018'),
 ('20231020202033'),
 ('20231020205336'),
 ('20231020205516'),
