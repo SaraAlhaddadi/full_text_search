@@ -69,11 +69,11 @@ CREATE TABLE public.jobs (
     gender character varying,
     skill character varying,
     sector character varying,
-    company character varying,
     salary numeric,
     created_at timestamp(6) without time zone NOT NULL,
     updated_at timestamp(6) without time zone NOT NULL,
-    searchable tsvector GENERATED ALWAYS AS (((setweight(to_tsvector('english'::regconfig, (COALESCE(title, ''::character varying))::text), 'A'::"char") || setweight(to_tsvector('english'::regconfig, (COALESCE(skill, ''::character varying))::text), 'B'::"char")) || setweight(to_tsvector('english'::regconfig, (COALESCE(sector, ''::character varying))::text), 'C'::"char"))) STORED
+    searchable tsvector GENERATED ALWAYS AS (((setweight(to_tsvector('english'::regconfig, (COALESCE(title, ''::character varying))::text), 'A'::"char") || setweight(to_tsvector('english'::regconfig, (COALESCE(skill, ''::character varying))::text), 'B'::"char")) || setweight(to_tsvector('english'::regconfig, (COALESCE(sector, ''::character varying))::text), 'C'::"char"))) STORED,
+    company_id bigint
 );
 
 
@@ -200,6 +200,13 @@ ALTER TABLE ONLY public.schema_migrations
 
 
 --
+-- Name: index_jobs_on_company_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_jobs_on_company_id ON public.jobs USING btree (company_id);
+
+
+--
 -- Name: index_jobs_on_searchable; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -214,6 +221,14 @@ CREATE INDEX index_pg_search_documents_on_searchable ON public.pg_search_documen
 
 
 --
+-- Name: jobs fk_rails_b34da78090; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.jobs
+    ADD CONSTRAINT fk_rails_b34da78090 FOREIGN KEY (company_id) REFERENCES public.companies(id);
+
+
+--
 -- PostgreSQL database dump complete
 --
 
@@ -225,6 +240,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20231020205336'),
 ('20231020205516'),
 ('20231021152410'),
-('20231021153403');
+('20231021153403'),
+('20231021153922');
 
 
